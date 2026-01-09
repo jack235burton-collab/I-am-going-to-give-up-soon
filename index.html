@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack Burton - Motocross Coach & Web Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            padding: 4rem 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .service-card.mx {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .service-card.web {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .service-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .service-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .page-hero.mx {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .page-hero.web {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #2d2d2d;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .price-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 3px solid #e0e0e0;
+            transition: transform 0.3s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+        }
+
+        .price-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .price-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .price-card li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial .author {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .btn-light {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-dark {
+            background: #2d2d2d;
+            color: white;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 3rem 2rem 2rem;
+            margin-top: 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #808080;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .page-hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('motocross')">Motocross Coaching</a></li>
+            <li><a href="#" onclick="showPage('webdesign')">Web Design</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>Jack Burton</h1>
+            <p>Elite Motocross Coach & Professional Web Designer</p>
+        </div>
+
+        <!-- My Story Section -->
+        <div style="max-width: 1200px; margin: 4rem auto; padding: 0 2rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem;">
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #2d2d2d;">My Story</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+                        I'm Jack Burton, a competitive motocross racer who achieved 3rd place at AJMX nationals and an NSW state title - all while attending school full-time. Without a track at home or unlimited practice time, I learned to train smarter, not harder. Now I help other riders reach their potential through efficient, technique-focused coaching. I also build websites to help local businesses grow and fund my racing career.
+                    </p>
+                </div>
+                <div style="background: #e0e0e0; border-radius: 15px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; color: #888;">
+                    <span style="font-size: 1.2rem;">Photo Coming Soon</span>
+                </div>
+            </div>
+
+            <!-- Web Design Section -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem;">
+                <div style="background: #e0e0e0; border-radius: 15px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; color: #888;">
+                    <span style="font-size: 1.2rem;">Photo Coming Soon</span>
+                </div>
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #2d2d2d;">Web Design</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
+                        I create custom websites that help local businesses attract more customers and grow. From single-page sites to full multi-page experiences, I build fast, mobile-friendly websites that actually convert visitors into customers.
+                    </p>
+                    <a href="#" class="btn" style="background: #4facfe; color: white;" onclick="showPage('webdesign')">View Web Services</a>
+                </div>
+            </div>
+
+            <!-- Coaching Section -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem;">
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #2d2d2d;">Motocross Coaching</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
+                        Learn the same techniques that took me to 3rd at AJMX nationals. My coaching focuses on building proper technique and body position first, so you can improve faster without needing endless practice time or the perfect setup.
+                    </p>
+                    <a href="#" class="btn" style="background: #f5576c; color: white;" onclick="showPage('motocross')">View Coaching</a>
+                </div>
+                <div style="background: #e0e0e0; border-radius: 15px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; color: #888;">
+                    <span style="font-size: 1.2rem;">Photo Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="motocross" class="page">
+        <div class="service-page">
+            <div class="page-hero mx">
+                <h1>Motocross Coaching</h1>
+                <p>Professional Training to Elevate Your Riding</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Why Choose My Coaching?</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>Support a Young Racer</h3>
+                        <p>When you book coaching with me, you're directly supporting a young rider pursuing their racing dreams. Every session helps fund my racing career and allows me to continue competing at the highest levels.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Cheap and Effective</h3>
+                        <p>As a young coach, I offer affordable rates without compromising on quality. You get professional-level coaching at a fraction of the cost.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Results</h3>
+                        <p>I achieved 3rd place at the AJMX nationals and earned an NSW state title through hard work and effective training - all while attending school full-time. I developed efficient techniques that maximize improvement in limited time.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Follow My 3 Step Training Technique</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>Step 1: Establish a Strong Body Position</h3>
+                        <p>When starting out it is crucial to not form bad habits and feel safe and comfortable on the bike. We'll focus on building the foundation that every fast rider needs.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Step 2: Move More Forward on the Bike</h3>
+                        <p>This progresses you to ride more like the pros. Moving forward on the bike provides more control and allows you to go faster.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Step 3: Start Training Fitness with Motos</h3>
+                        <p>Once technique is solid, we add fitness training through structured motos. If you make the same mistake twice, we identify and fix the technique problem at its root.</p>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 10px;">
+                    <strong>Important Note:</strong> I do not train strictly motos or "speed" because you don't go faster around a corner by entering faster - you go faster by having more control and putting the bike where it needs to be. This is achieved through technique training and why I can be faster than kids with better bikes, who don't go to school, and have a track on their property.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2>Coaching Packages</h2>
+                <div class="pricing">
+                    <div class="price-card">
+                        <h3>Single Session</h3>
+                        <div class="price">$150</div>
+                        <ul>
+                            <li>2-hour private session</li>
+                            <li>Personalized feedback</li>
+                            <li>Basic video analysis</li>
+                            <li>Training plan outline</li>
+                        </ul>
+                        <button class="btn btn-dark">Book Now</button>
+                    </div>
+                    <div class="price-card">
+                        <h3>4-Session Package</h3>
+                        <div class="price">$500</div>
+                        <ul>
+                            <li>Four 2-hour sessions</li>
+                            <li>Detailed video analysis</li>
+                            <li>Custom training program</li>
+                            <li>Email support</li>
+                            <li>Progress tracking</li>
+                        </ul>
+                        <button class="btn btn-dark">Book Now</button>
+                    </div>
+                    <div class="price-card">
+                        <h3>Monthly Coaching</h3>
+                        <div class="price">$800</div>
+                        <ul>
+                            <li>8 sessions per month</li>
+                            <li>Comprehensive video analysis</li>
+                            <li>Bike setup consultation</li>
+                            <li>Fitness guidance</li>
+                            <li>24/7 text support</li>
+                        </ul>
+                        <button class="btn btn-dark">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Results</h2>
+                <div class="testimonial">
+                    <p>"Best investment I've made in my riding career. Within 3 months, I went from mid-pack to podium finishes."</p>
+                    <div class="author">- Jake M., Amateur A Class</div>
+                </div>
+                <div class="testimonial">
+                    <p>"As a beginner, I was nervous about getting coaching. The patience and clear instruction helped me build confidence quickly."</p>
+                    <div class="author">- Sarah K., Beginner Class</div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Improve Your Riding?</h2>
+                <p>Book your first coaching session today.</p>
+                <button class="btn btn-light">Schedule a Session</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="webdesign" class="page">
+        <div class="service-page">
+            <div class="page-hero web">
+                <h1>Web Design & Development</h1>
+                <p>Custom Websites That Drive Results</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Why Work With Me?</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>Conversion-Focused Design</h3>
+                        <p>Beautiful websites that actually convert visitors into customers with strategic design.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Mobile-First Approach</h3>
+                        <p>Every site is optimized for mobile devices first, ensuring perfect display on all screens.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>SEO Optimized</h3>
+                        <p>Built-in search engine optimization so your customers can find you on Google.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Fast & Secure</h3>
+                        <p>Lightning-fast loading speeds and enterprise-level security.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Service Packages</h2>
+                <div class="pricing">
+                    <div class="price-card">
+                        <h3>Single Page Website</h3>
+                        <div class="price">$150</div>
+                        <ul>
+                            <li>Single-page design</li>
+                            <li>Mobile responsive</li>
+                            <li>Contact form</li>
+                            <li>SEO basics</li>
+                            <li>2 rounds of revisions</li>
+                            <li>2-week delivery</li>
+                        </ul>
+                        <button class="btn btn-dark">Get Started</button>
+                    </div>
+                    <div class="price-card">
+                        <h3>Multi-Page Website</h3>
+                        <div class="price">$300</div>
+                        <ul>
+                            <li>Up to 5 pages</li>
+                            <li>Full mobile optimization</li>
+                            <li>Contact & booking forms</li>
+                            <li>Advanced SEO</li>
+                            <li>Google Analytics</li>
+                            <li>3 rounds of revisions</li>
+                            <li>4-week delivery</li>
+                        </ul>
+                        <button class="btn btn-dark">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Client Results</h2>
+                <div class="testimonial">
+                    <p>"The new website brought in so many new clients that it paid for itself in just 2 weeks. Now I'm getting bookings from people who found me on Google. Best business decision I've made."</p>
+                    <div class="author">- Jai Fades, Local Barber Shop</div>
+                </div>
+                <div class="testimonial">
+                    <p>"Should have hired a pro from the start. The investment paid for itself in 2 weeks with new clients. Clean, professional design that actually works."</p>
+                    <div class="author">- Lisa T., Fitness Coach</div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Grow Your Business?</h2>
+                <p>Let's build a website that works as hard as you do.</p>
+                <button class="btn btn-light">Get Your Free Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Jack Burton</h3>
+                <p>Motocross Coach & Web Designer</p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="#" onclick="showPage('motocross')">Motocross Coaching</a>
+                <a href="#" onclick="showPage('webdesign')">Web Design</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Phone: <a href="tel:0497446979">0497 446 979</a></p>
+                <p>Email: <a href="mailto:jack.235.burton@gmail.com">jack.235.burton@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Jack Burton. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
